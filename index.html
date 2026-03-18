@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iFamily | Inscrição</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#f5f7fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    background:white;
+    border-radius:24px;
+    padding:40px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.08);
+}
+
+.step{
+    display:none;
+}
+
+.step.active{
+    display:block;
+}
+
+h1{
+    color:#111827;
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+p{
+    color:#6b7280;
+    line-height:1.6;
+}
+
+.options{
+    margin-top:25px;
+    display:grid;
+    gap:15px;
+}
+
+.option{
+    padding:18px;
+    border:2px solid #e5e7eb;
+    border-radius:14px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.option:hover{
+    border-color:#2563eb;
+    background:#eff6ff;
+}
+
+input, select{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    margin-bottom:20px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    font-size:15px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:14px 30px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.progress{
+    height:8px;
+    background:#e5e7eb;
+    border-radius:10px;
+    margin-bottom:30px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:16%;
+    background:#2563eb;
+    transition:.3s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="progress">
+<div class="progress-bar" id="progress"></div>
+</div>
+
+<!-- Tela 1 -->
+<div class="step active">
+<h1>Olá, Foodlover! 💙</h1>
+
+<p>
+Que bom que você chegou ao nosso programa iFamily!<br><br>
+
+Isso significa que a família vai crescer, né? E estamos muito felizes por fazer parte desse momento com você!<br><br>
+
+O iFamily foi desenhado para suportar FoodLovers e suas famílias na chegada dos filhos e para começarmos essa jornada juntos precisamos de algumas informações, tá bom?<br><br>
+
+Não vai levar nem 5 minutos.
+</p>
+
+<div class="options">
+<div class="option">🤰 Estou gestante!</div>
+<div class="option">👨‍🍼 Sou parceiro ou parceira de uma pessoa gestante!</div>
+<div class="option">👶 Adotei ou sou pretendente à adoção!</div>
+<div class="option">✏️ Outro</div>
+</div>
+
+<br>
+<button onclick="nextStep()">Continuar</button>
+</div>
+
+<!-- Tela 2 -->
+<div class="step">
+<h1>Identificação</h1>
+
+<label>Qual seu nome completo:</label>
+<input type="text">
+
+<label>Qual seu email iFood:</label>
+<input type="email">
+
+<label>Seu número de celular:</label>
+<input type="text">
+
+<button onclick="nextStep()">Continuar</button>
+</div>
+
+<!-- Tela 3 -->
+<div class="step">
+<h1>Liderança</h1>
+
+<p>Assim que você se inscreve no programa, sua liderança passa a fazer parte também.</p>
+
+<label>Compartilhou com sua liderança?</label>
+<select>
+<option>Já compartilhei</option>
+<option>Prefiro esperar mais um pouco</option>
+</select>
+
+<label>Contato durante licença:</label>
+<select>
+<option>Prefiro curtir o momento</option>
+<option>Conversas pontuais</option>
+<option>Contato frequente</option>
+</select>
+
+<label>Email da liderança:</label>
+<input type="email">
+
+<button onclick="nextStep()">Continuar</button>
+</div>
+
+<!-- Tela 4 -->
+<div class="step">
+<h1>Acolhimento</h1>
+
+<label>Com quantas semanas está a gestação?</label>
+<select>
+<option>Selecione</option>
+</select>
+
+<label>Data prevista do parto:</label>
+<input type="date">
+
+<label>Interesse em acolhimento social:</label>
+<select>
+<option>Muito interesse</option>
+<option>Quero entender mais</option>
+<option>Não preciso</option>
+</select>
+
+<button onclick="nextStep()">Continuar</button>
+</div>
+
+<!-- Tela 5 -->
+<div class="step">
+<h1>Mentoria de Carreira</h1>
+
+<p>O Programa oferece Mentoria voltada à preparação profissional.</p>
+
+<select>
+<option>Muito interesse</option>
+<option>Quero entender mais</option>
+<option>Não preciso</option>
+</select>
+
+<br><br>
+<button onclick="nextStep()">Continuar</button>
+</div>
+
+<!-- Tela 6 -->
+<div class="step">
+<h1>Prontinho! 🎉</h1>
+
+<p>
+Sua inscrição foi concluída.<br><br>
+
+Você receberá no Slack as próximas orientações.<br><br>
+
+Nosso Bot iFamily Foodlover irá te levar atualizações, próximos passos e novidades.
+<br><br>
+Bem-vindo(a)! Que seja uma jornada #alltogether 💙
+</p>
+
+<button>Finalizar</button>
+</div>
+
+</div>
+
+<script>
+let currentStep = 0;
+const steps = document.querySelectorAll('.step');
+const progress = document.getElementById('progress');
+
+function nextStep(){
+    steps[currentStep].classList.remove('active');
+    currentStep++;
+    if(currentStep < steps.length){
+        steps[currentStep].classList.add('active');
+        progress.style.width = ((currentStep+1)/steps.length)*100 + '%';
+    }
+}
+
+for(let i=1;i<=42;i++){
+    const option=document.createElement('option');
+    option.text=i+' semanas';
+    document.querySelectorAll('select')[2].appendChild(option);
+}
+</script>
+
+</body>
+</html>
