@@ -224,14 +224,11 @@ async function enviarFormulario(){
         mentoria: document.querySelector('[name="mentoria"]').value
     };
 
-    await fetch("https://script.google.com/a/macros/ifood.com.br/s/AKfycbwg56LAubcDQCfhDb97JMA1Fol3ySYl3XPxxHxu4TiB8j_W5t-nPKYrG2CbpxC64vGkaw/exec",{
-        method:"POST",
-        mode:"no-cors",
-        headers:{
-            "Content-Type":"text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(data)
-    });
+ await fetch("https://script.google.com/a/macros/ifood.com.br/s/AKfycbwg56LAubcDQCfhDb97JMA1Fol3ySYl3XPxxHxu4TiB8j_W5t-nPKYrG2CbpxC64vGkaw/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    mode: "no-cors"
+});
 
     alert("Inscrição enviada com sucesso 🎉");
 }
