@@ -264,15 +264,19 @@ async function enviarFormulario(){
         mentoria: document.querySelector('[name="mentoria"]').value
     };
     
-    await fetch(scriptURL,{
+    ```javascript id="wlri6m"
+await fetch(scriptURL,{
     method:"POST",
     headers:{
         "Content-Type":"text/plain;charset=utf-8"
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
+    mode:"no-cors"
 });
 
-    alert("Inscrição enviada com sucesso 🎉");
+alert("Inscrição enviada com sucesso 🎉");
+```
+
 }
 </script>
 
