@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -25,13 +26,8 @@ body{
     box-shadow:0 10px 35px rgba(0,0,0,0.08);
 }
 
-.step{
-    display:none;
-}
-
-.step.active{
-    display:block;
-}
+.step{display:none;}
+.step.active{display:block;}
 
 h1{
     color:#111827;
@@ -61,6 +57,11 @@ p{
 .option:hover{
     border-color:#2563eb;
     background:#eff6ff;
+}
+
+.option.selected{
+    border-color:#2563eb;
+    background:#dbeafe;
 }
 
 input, select{
@@ -114,20 +115,17 @@ button{
 
 <p>
 Que bom que você chegou ao nosso programa iFamily!<br><br>
-
-Isso significa que a família vai crescer, né? E estamos muito felizes por fazer parte desse momento com você!<br><br>
-
-O iFamily foi desenhado para suportar FoodLovers e suas famílias na chegada dos filhos e para começarmos essa jornada juntos precisamos de algumas informações, tá bom?<br><br>
-
-Não vai levar nem 5 minutos.
+Isso significa que a família vai crescer, né? E estamos muito felizes por fazer parte desse momento com você!
 </p>
 
 <div class="options">
-<div class="option">🤰 Estou gestante!</div>
-<div class="option">👨‍🍼 Sou parceiro ou parceira de uma pessoa gestante!</div>
-<div class="option">👶 Adotei ou sou pretendente à adoção!</div>
-<div class="option">✏️ Outro</div>
+<div class="option" data-value="Gestante">🤰 Estou gestante!</div>
+<div class="option" data-value="Parceiro">👨‍🍼 Sou parceiro ou parceira de uma pessoa gestante!</div>
+<div class="option" data-value="Adoção">👶 Adotei ou sou pretendente à adoção!</div>
+<div class="option" data-value="Outro">✏️ Outro</div>
 </div>
+
+<input type="hidden" name="perfil" id="perfil">
 
 <br>
 <button onclick="nextStep()">Continuar</button>
@@ -138,13 +136,13 @@ Não vai levar nem 5 minutos.
 <h1>Identificação</h1>
 
 <label>Qual seu nome completo:</label>
-<input type="text">
+<input type="text" name="nome">
 
 <label>Qual seu email iFood:</label>
-<input type="email">
+<input type="email" name="email">
 
 <label>Seu número de celular:</label>
-<input type="text">
+<input type="text" name="celular">
 
 <button onclick="nextStep()">Continuar</button>
 </div>
@@ -153,23 +151,21 @@ Não vai levar nem 5 minutos.
 <div class="step">
 <h1>Liderança</h1>
 
-<p>Assim que você se inscreve no programa, sua liderança passa a fazer parte também.</p>
-
 <label>Compartilhou com sua liderança?</label>
-<select>
+<select name="lideranca">
 <option>Já compartilhei</option>
 <option>Prefiro esperar mais um pouco</option>
 </select>
 
 <label>Contato durante licença:</label>
-<select>
+<select name="contatoLicenca">
 <option>Prefiro curtir o momento</option>
 <option>Conversas pontuais</option>
 <option>Contato frequente</option>
 </select>
 
 <label>Email da liderança:</label>
-<input type="email">
+<input type="email" name="emailLideranca">
 
 <button onclick="nextStep()">Continuar</button>
 </div>
@@ -179,15 +175,15 @@ Não vai levar nem 5 minutos.
 <h1>Acolhimento</h1>
 
 <label>Com quantas semanas está a gestação?</label>
-<select>
+<select name="semanasGestacao" id="semanasGestacao">
 <option>Selecione</option>
 </select>
 
 <label>Data prevista do parto:</label>
-<input type="date">
+<input type="date" name="dataParto">
 
 <label>Interesse em acolhimento social:</label>
-<select>
+<select name="acolhimento">
 <option>Muito interesse</option>
 <option>Quero entender mais</option>
 <option>Não preciso</option>
@@ -200,9 +196,7 @@ Não vai levar nem 5 minutos.
 <div class="step">
 <h1>Mentoria de Carreira</h1>
 
-<p>O Programa oferece Mentoria voltada à preparação profissional.</p>
-
-<select>
+<select name="mentoria">
 <option>Muito interesse</option>
 <option>Quero entender mais</option>
 <option>Não preciso</option>
@@ -216,17 +210,9 @@ Não vai levar nem 5 minutos.
 <div class="step">
 <h1>Prontinho! 🎉</h1>
 
-<p>
-Sua inscrição foi concluída.<br><br>
+<p>Sua inscrição foi concluída.</p>
 
-Você receberá no Slack as próximas orientações.<br><br>
-
-Nosso Bot iFamily Foodlover irá te levar atualizações, próximos passos e novidades.
-<br><br>
-Bem-vindo(a)! Que seja uma jornada #alltogether 💙
-</p>
-
-<button>Finalizar</button>
+<button onclick="enviarFormulario()">Finalizar</button>
 </div>
 
 </div>
@@ -248,9 +234,45 @@ function nextStep(){
 for(let i=1;i<=42;i++){
     const option=document.createElement('option');
     option.text=i+' semanas';
-    document.querySelectorAll('select')[2].appendChild(option);
+    option.value=i+' semanas';
+    document.getElementById('semanasGestacao').appendChild(option);
+}
+
+document.querySelectorAll('.option').forEach(option=>{
+    option.addEventListener('click',()=>{
+        document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+        option.classList.add('selected');
+        document.getElementById('perfil').value = option.dataset.value;
+    });
+});
+
+const scriptURL = "SUA_URL_DO_APPS_SCRIPT";
+
+async function enviarFormulario(){
+
+    const data = {
+        perfil: document.getElementById('perfil').value,
+        nome: document.querySelector('[name="nome"]').value,
+        email: document.querySelector('[name="email"]').value,
+        celular: document.querySelector('[name="celular"]').value,
+        lideranca: document.querySelector('[name="lideranca"]').value,
+        contatoLicenca: document.querySelector('[name="contatoLicenca"]').value,
+        emailLideranca: document.querySelector('[name="emailLideranca"]').value,
+        semanasGestacao: document.querySelector('[name="semanasGestacao"]').value,
+        dataParto: document.querySelector('[name="dataParto"]').value,
+        acolhimento: document.querySelector('[name="acolhimento"]').value,
+        mentoria: document.querySelector('[name="mentoria"]').value
+    };
+
+    await fetch(scriptURL,{
+        method:"POST",
+        body: JSON.stringify(data)
+    });
+
+    alert("Inscrição enviada com sucesso 🎉");
 }
 </script>
 
 </body>
 </html>
+```
