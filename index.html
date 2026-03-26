@@ -1,4 +1,4 @@
-```html
+```html id="j9nq4w"
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,7 +16,6 @@ body{
     align-items:center;
     min-height:100vh;
 }
-
 .container{
     width:90%;
     max-width:800px;
@@ -25,27 +24,22 @@ body{
     padding:40px;
     box-shadow:0 10px 35px rgba(0,0,0,0.08);
 }
-
 .step{display:none;}
 .step.active{display:block;}
-
 h1{
     color:#111827;
     font-size:30px;
     margin-bottom:15px;
 }
-
 p{
     color:#6b7280;
     line-height:1.6;
 }
-
 .options{
     margin-top:25px;
     display:grid;
     gap:15px;
 }
-
 .option{
     padding:18px;
     border:2px solid #e5e7eb;
@@ -53,17 +47,14 @@ p{
     cursor:pointer;
     transition:.3s;
 }
-
 .option:hover{
     border-color:#2563eb;
     background:#eff6ff;
 }
-
 .option.selected{
     border-color:#2563eb;
     background:#dbeafe;
 }
-
 input, select{
     width:100%;
     padding:14px;
@@ -73,7 +64,6 @@ input, select{
     border:1px solid #d1d5db;
     font-size:15px;
 }
-
 button{
     background:#2563eb;
     color:white;
@@ -83,7 +73,6 @@ button{
     cursor:pointer;
     font-size:16px;
 }
-
 .progress{
     height:8px;
     background:#e5e7eb;
@@ -91,7 +80,6 @@ button{
     margin-bottom:30px;
     overflow:hidden;
 }
-
 .progress-bar{
     height:100%;
     width:16%;
@@ -109,14 +97,9 @@ button{
 <div class="progress-bar" id="progress"></div>
 </div>
 
-<!-- Tela 1 -->
 <div class="step active">
 <h1>Olá, Foodlover! 💙</h1>
-
-<p>
-Que bom que você chegou ao nosso programa iFamily!<br><br>
-Isso significa que a família vai crescer, né? E estamos muito felizes por fazer parte desse momento com você!
-</p>
+<p>Que bom que você chegou ao nosso programa iFamily!</p>
 
 <div class="options">
 <div class="option" data-value="Gestante">🤰 Estou gestante!</div>
@@ -125,74 +108,55 @@ Isso significa que a família vai crescer, né? E estamos muito felizes por faze
 <div class="option" data-value="Outro">✏️ Outro</div>
 </div>
 
-<input type="hidden" name="perfil" id="perfil">
+<input type="hidden" id="perfil" name="perfil">
 
-<br>
-<button onclick="nextStep()">Continuar</button>
+<button type="button" onclick="nextStep()">Continuar</button>
 </div>
 
-<!-- Tela 2 -->
 <div class="step">
 <h1>Identificação</h1>
-
-<label>Qual seu nome completo:</label>
-<input type="text" name="nome">
-
-<label>Qual seu email iFood:</label>
-<input type="email" name="email">
-
-<label>Seu número de celular:</label>
-<input type="text" name="celular">
-
-<button onclick="nextStep()">Continuar</button>
+<input type="text" name="nome" placeholder="Nome completo">
+<input type="email" name="email" placeholder="Email iFood">
+<input type="text" name="celular" placeholder="Celular">
+<button type="button" onclick="nextStep()">Continuar</button>
 </div>
 
-<!-- Tela 3 -->
 <div class="step">
 <h1>Liderança</h1>
-
-<label>Compartilhou com sua liderança?</label>
 <select name="lideranca">
 <option>Já compartilhei</option>
 <option>Prefiro esperar mais um pouco</option>
 </select>
 
-<label>Contato durante licença:</label>
 <select name="contatoLicenca">
 <option>Prefiro curtir o momento</option>
 <option>Conversas pontuais</option>
 <option>Contato frequente</option>
 </select>
 
-<label>Email da liderança:</label>
-<input type="email" name="emailLideranca">
+<input type="email" name="emailLideranca" placeholder="Email liderança">
 
-<button onclick="nextStep()">Continuar</button>
+<button type="button" onclick="nextStep()">Continuar</button>
 </div>
 
-<!-- Tela 4 -->
 <div class="step">
 <h1>Acolhimento</h1>
 
-<label>Com quantas semanas está a gestação?</label>
 <select name="semanasGestacao" id="semanasGestacao">
 <option>Selecione</option>
 </select>
 
-<label>Data prevista do parto:</label>
 <input type="date" name="dataParto">
 
-<label>Interesse em acolhimento social:</label>
 <select name="acolhimento">
 <option>Muito interesse</option>
 <option>Quero entender mais</option>
 <option>Não preciso</option>
 </select>
 
-<button onclick="nextStep()">Continuar</button>
+<button type="button" onclick="nextStep()">Continuar</button>
 </div>
 
-<!-- Tela 5 -->
 <div class="step">
 <h1>Mentoria de Carreira</h1>
 
@@ -202,17 +166,13 @@ Isso significa que a família vai crescer, né? E estamos muito felizes por faze
 <option>Não preciso</option>
 </select>
 
-<br><br>
-<button onclick="nextStep()">Continuar</button>
+<button type="button" onclick="nextStep()">Continuar</button>
 </div>
 
-<!-- Tela 6 -->
 <div class="step">
 <h1>Prontinho! 🎉</h1>
-
 <p>Sua inscrição foi concluída.</p>
-
-<button onclick="enviarFormulario()">Finalizar</button>
+<button type="button" id="btnFinalizar">Finalizar</button>
 </div>
 
 </div>
@@ -246,7 +206,7 @@ document.querySelectorAll('.option').forEach(option=>{
     });
 });
 
-const scriptURL = "https://script.google.com/a/macros/ifood.com.br/s/AKfycbwg56LAubcDQCfhDb97JMA1Fol3ySYl3XPxxHxu4TiB8j_W5t-nPKYrG2CbpxC64vGkaw/exec";
+document.getElementById("btnFinalizar").addEventListener("click", enviarFormulario);
 
 async function enviarFormulario(){
 
@@ -264,7 +224,7 @@ async function enviarFormulario(){
         mentoria: document.querySelector('[name="mentoria"]').value
     };
 
-    await fetch(scriptURL,{
+    await fetch("https://script.google.com/a/macros/ifood.com.br/s/AKfycbwg56LAubcDQCfhDb97JMA1Fol3ySYl3XPxxHxu4TiB8j_W5t-nPKYrG2CbpxC64vGkaw/exec",{
         method:"POST",
         mode:"no-cors",
         headers:{
